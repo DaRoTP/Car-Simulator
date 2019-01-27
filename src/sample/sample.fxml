@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="container" onKeyPressed="#keyPressed" prefHeight="707.0" prefWidth="1372.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+    <children>
+        <VBox layoutX="873.0" layoutY="291.0" prefHeight="152.0" prefWidth="153.0">
+            <children>
+                <Label fx:id="tachometer_label" alignment="CENTER" prefHeight="92.0" prefWidth="164.0" text="0" textAlignment="JUSTIFY" textFill="WHITE">
+                    <font>
+                        <Font size="50.0" />
+                    </font>
+                </Label>
+                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="60.0" prefWidth="153.0" text="RPM" textAlignment="CENTER" textFill="WHITE">
+                    <font>
+                        <Font name="Agency FB" size="40.0" />
+                    </font>
+                </Label>
+            </children>
+        </VBox>
+        <VBox layoutX="290.0" layoutY="291.0" prefHeight="152.0" prefWidth="153.0">
+            <children>
+                <Label fx:id="speedometer_label" alignment="CENTER" prefHeight="92.0" prefWidth="164.0" text="0" textAlignment="JUSTIFY" textFill="WHITE">
+                    <font>
+                        <Font size="50.0" />
+                    </font>
+                </Label>
+                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="60.0" prefWidth="153.0" text="KM/H" textAlignment="CENTER" textFill="WHITE">
+                    <font>
+                        <Font name="Agency FB" size="40.0" />
+                    </font>
+                </Label>
+            </children>
+        </VBox>
+        <VBox layoutX="636.0" layoutY="417.0" prefHeight="92.0" prefWidth="63.0">
+            <children>
+                <Label alignment="CENTER" prefHeight="21.0" prefWidth="58.0" text="GEAR" textFill="WHITE">
+                    <font>
+                        <Font size="19.0" />
+                    </font>
+                </Label>
+                <Label fx:id="gear_label" alignment="CENTER" contentDisplay="TOP" prefHeight="32.0" prefWidth="62.0" text="N" textAlignment="CENTER" textFill="WHITE">
+                    <font>
+                        <Font size="40.0" />
+                    </font>
+                </Label>
+            </children>
+        </VBox>
+        <Button fx:id="Engin_ON_OFF" layoutX="1159.0" layoutY="580.0" mnemonicParsing="false" onAction="#turn_ON_OF" prefHeight="69.0" prefWidth="117.0" text="START" />
+        <HBox layoutX="1267.0" layoutY="14.0" prefHeight="100.0" prefWidth="91.0" spacing="10.0">
+            <children>
+                <Button fx:id="minimize" mnemonicParsing="false" onAction="#minimize_" prefHeight="31.0" prefWidth="40.0" text="_" />
+                <Button fx:id="Exit" mnemonicParsing="false" onAction="#exit_x" prefHeight="31.0" prefWidth="40.0" text="X" />
+            </children>
+        </HBox>
+    </children>
+</AnchorPane>
