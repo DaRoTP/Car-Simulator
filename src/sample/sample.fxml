@@ -52,9 +52,10 @@
             </children>
         </VBox>
         <Button fx:id="Engin_ON_OFF" layoutX="1159.0" layoutY="580.0" mnemonicParsing="false" onAction="#turn_ON_OF" prefHeight="69.0" prefWidth="117.0" text="START" />
-        <HBox layoutX="1267.0" layoutY="14.0" prefHeight="100.0" prefWidth="91.0" spacing="10.0">
+        <HBox layoutX="1215.0" layoutY="10.0" prefHeight="58.0" prefWidth="153.0" spacing="10.0">
             <children>
                 <Button fx:id="minimize" mnemonicParsing="false" onAction="#minimize_" prefHeight="31.0" prefWidth="40.0" text="_" />
+            <Button fx:id="maximize" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#maximize_" prefHeight="31.0" prefWidth="40.0" text="❏" />
                 <Button fx:id="Exit" mnemonicParsing="false" onAction="#exit_x" prefHeight="31.0" prefWidth="40.0" text="X" />
             </children>
         </HBox>

@@ -31,6 +31,7 @@ public class Controller implements Initializable
     //VARIABLES
     private Car auto = new Car();
     int gr = 0;
+    boolean maximizebool = false;
     String image1 = this.getClass().getResource("car_off.png").toExternalForm();
     String image2 = this.getClass().getResource("car_on.png").toExternalForm();
 
@@ -53,6 +54,8 @@ public class Controller implements Initializable
     private Button Exit;
     @FXML
     private Button minimize;
+    @FXML
+    private Button maximize;
 
     /*wyjscie z programu */
     @FXML
@@ -65,9 +68,16 @@ public class Controller implements Initializable
         Stage stage = (Stage)((Button)event.getSource()).getScene().getWindow();
         stage.setIconified(true);
     }
+    /* Maksymalizacja */
+    @FXML
+    public void maximize_(ActionEvent event){
+        Stage stage = (Stage)((Button)event.getSource()).getScene().getWindow();
+        maximizebool = !maximizebool;
 
+            stage.setMaximized(maximizebool);
+    }
 
-    //TURN ENGIN ON OR OF
+    //TURN ENGINE ON OR OF
 //-------------------------------------------->
     public void turn_ON_OF(ActionEvent event)
     {
