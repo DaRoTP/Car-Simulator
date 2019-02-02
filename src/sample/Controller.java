@@ -13,28 +13,36 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class Controller implements Initializable
 {
-    /*inicjalizacja */
-    @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
-        try {
-            update_lable();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+
 
     //VARIABLES
     private Car auto = new Car();
     int gr = 0;
     boolean maximizebool = false;
-    String image1 = this.getClass().getResource("car_off.png").toExternalForm();
-    String image2 = this.getClass().getResource("car_on.png").toExternalForm();
+    String image1 = this.getClass().getResource("resources/car_off.png").toExternalForm();
+    String image2 = this.getClass().getResource("resources/car_on.png").toExternalForm();
 
+
+/*inicjalizacja */
+@Override
+public void initialize(URL arg0, ResourceBundle arg1) {
+    container.setStyle(" -fx-background-image: url('" + image1 + "');  ");
+    try {
+        update_lable();
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    }
+}
+    //PANES
+//-------------------------------------------->
+    @FXML
+    private GridPane grid;
     //LABELS
 //-------------------------------------------->
     @FXML

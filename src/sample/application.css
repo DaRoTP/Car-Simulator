@@ -1,7 +1,4 @@
-#container{
-	-fx-background-image: url("car_off.png");
-	-fx-background-color: black;
-}
+
 
 .button{
 	-fx-font-weight: bold;
