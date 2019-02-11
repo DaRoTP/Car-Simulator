@@ -9,11 +9,13 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -25,24 +27,17 @@ public class Controller implements Initializable
     private Car auto = new Car();
     int gr = 0;
     boolean maximizebool = false;
-    String image1 = this.getClass().getResource("resources/car_off.png").toExternalForm();
-    String image2 = this.getClass().getResource("resources/car_on.png").toExternalForm();
 
 
-/*inicjalizacja */
-@Override
-public void initialize(URL arg0, ResourceBundle arg1) {
-    container.setStyle(" -fx-background-image: url('" + image1 + "');  ");
-    try {
-        update_lable();
-    } catch (InterruptedException e) {
-        e.printStackTrace();
-    }
-}
     //PANES
 //-------------------------------------------->
     @FXML
     private GridPane grid;
+    @FXML
+    StackPane stack = new StackPane();
+    @FXML
+    AnchorPane anchor = new AnchorPane();
+
     //LABELS
 //-------------------------------------------->
     @FXML
@@ -51,8 +46,6 @@ public void initialize(URL arg0, ResourceBundle arg1) {
     private Label tachometer_label;
     @FXML
     private Label gear_label;
-    @FXML
-    private AnchorPane container;
 
     //BUTTONS
 //-------------------------------------------->
@@ -85,6 +78,18 @@ public void initialize(URL arg0, ResourceBundle arg1) {
             stage.setMaximized(maximizebool);
     }
 
+
+    /*inicjalizacja */
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        try {
+            update_lable();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     //TURN ENGINE ON OR OF
 //-------------------------------------------->
     public void turn_ON_OF(ActionEvent event)
@@ -93,7 +98,6 @@ public void initialize(URL arg0, ResourceBundle arg1) {
 
         if(auto.isRunning())
         {
-            container.setStyle(" -fx-background-image: url('" + image2 + "');  ");
             auto.setRPM(1120);
             tachometer_label.setText(Integer.toString(auto.getrpm()));
             auto.change_gears(gr);
@@ -101,7 +105,6 @@ public void initialize(URL arg0, ResourceBundle arg1) {
         }
         else
         {
-            container.setStyle(" -fx-background-image: url('" + image1 + "');  ");
             auto.setRPM(0);
             auto.setSpeed(0);
             speedometer_label.setText(Integer.toString((int)auto.getSpeed()));
