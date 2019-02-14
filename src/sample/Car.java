@@ -79,6 +79,8 @@ public class Car
             //RPM
             if(this.rpm < 3010)
                 this.rpm += (5000 - this.rpm)*0.01;
+            if(this.rpm > 6000)
+                this.rpm = 6100;
         }
         /* jezeli wlaczony bieg "R" to mozemy osiagnac maksymalna predkosc 20 km/h i 2100 obrotow */
         else if(getGear() == "R")

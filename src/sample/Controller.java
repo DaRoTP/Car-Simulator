@@ -7,6 +7,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -31,12 +32,16 @@ public class Controller implements Initializable
     private Car auto = new Car(); //object of a class Car
     int gr = 0; //changing gears variable
     boolean maximizebool = false;
+    boolean change_img = false;
     private double xOffset = 0;
     private double yOffset = 0;
 
+
+    //IMAGES
+//-------------------------------------------->
     private Image car_on = new Image("sample/resources/car_on.png");
     private Image car_off = new Image("sample/resources/car_off.png");
-
+    private Image help = new Image("sample/resources/help.png");
 
     //PANES
 //-------------------------------------------->
@@ -53,6 +58,8 @@ public class Controller implements Initializable
 //-------------------------------------------->
     @FXML
     private ImageView car_hud;
+    @FXML
+    private ImageView Info_Image;
 
     //LABELS
 //-------------------------------------------->
@@ -62,6 +69,8 @@ public class Controller implements Initializable
     private Label tachometer_label;
     @FXML
     private Label gear_label;
+    @FXML
+    private Label Start_Stop;
 
     //BUTTONS
 //-------------------------------------------->
@@ -73,6 +82,8 @@ public class Controller implements Initializable
     private Button minimize;
     @FXML
     private Button maximize;
+    @FXML
+    private Button help_btn;
 
 
 // MAXIMIZE MINIMIZE EXIT STAGE
@@ -97,15 +108,41 @@ public class Controller implements Initializable
             stage.setMaximized(maximizebool);
     }
 
+    /* HELP */
+    @FXML
+    public void Info(ActionEvent event){
+        change_img = !change_img;
+        if(change_img)
+            Info_Image.setImage(help);
+        else
+            Info_Image.setImage(null);
+    }
+
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        makeDrgable();
         try {
             update_lable();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
+    }
+
+    //DRAGABLE STAGE
+//-------------------------------------------->
+    private void makeDrgable(){
+        dragable.setOnMousePressed((event) -> {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
+
+        dragable.setOnMouseDragged((event) -> {
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setX(event.getSceneX() - xOffset);
+            stage.setY(event.getSceneY() - yOffset);
+        });
     }
 
     //TURN ENGINE ON OR OF
@@ -119,6 +156,8 @@ public class Controller implements Initializable
         {
             car_hud.setImage(car_on);
             auto.setRPM(1120);
+            Start_Stop.setText("STOP");
+            Start_Stop.setStyle(" -fx-text-fill: #DB37B7;  ");
             tachometer_label.setText(Integer.toString(auto.getrpm()));
             auto.change_gears(gr);
             gear_label.setText(auto.getGear());
@@ -130,6 +169,8 @@ public class Controller implements Initializable
             auto.setRPM(0);
             auto.setSpeed(0);
             speedometer_label.setText(Integer.toString((int)auto.getSpeed()));
+            Start_Stop.setText("START");
+            Start_Stop.setStyle(" -fx-text-fill: #000430;  ");
             tachometer_label.setText(Integer.toString(auto.getrpm()));
         }
     }
@@ -145,7 +186,7 @@ public class Controller implements Initializable
             switch(ev.getCode())
             {
                 /*przyspieszenie - uzuwamy funkcji classy car "speed_up" i aktualizujemy etykiety*/
-                case UP:
+                case W:
                 {
                     auto.speed_up();
                     speedometer_label.setText(Integer.toString((int)auto.getSpeed()));
@@ -153,7 +194,7 @@ public class Controller implements Initializable
                 }
                 break;
                 /*hamowanie - uzuwamy funkcji classy car "slow_down" i aktualizujemy etykiety*/
-                case DOWN:
+                case S:
                 {
                     auto.slow_down();
                     speedometer_label.setText(Integer.toString((int)auto.getSpeed()));
@@ -164,7 +205,7 @@ public class Controller implements Initializable
                  * nie zmieniamy biegu np. z 5 na 2
                  * kiedy przechodzimy do biegu nizszego np. z 4 na 3 i obroty sa > 2500 to dodajemy +1800 obrotow
                  * a jezeli obroty  < 1600 dodajemy +1600 */
-                case LEFT:
+                case A:
                 {
                     gr--;
                     if(gr == -2)
@@ -173,7 +214,7 @@ public class Controller implements Initializable
                     gear_label.setText(auto.getGear());
                     if(gr != -1 && gr != 0 && gr != 1)
                     {
-                        if(auto.getrpm() > 2500)
+                        if(auto.getrpm() > 2500 && auto.getrpm() < 6100)
                         {
                             auto.setRPM(auto.getrpm()+1800);
                             tachometer_label.setText(Integer.toString(auto.getrpm()));
@@ -188,7 +229,7 @@ public class Controller implements Initializable
                 }
                 break;
                 /*zmieniamy bieg w gore - */
-                case RIGHT:
+                case D:
                 {
                     gr++;
                     if(gr == 6)
@@ -202,7 +243,7 @@ public class Controller implements Initializable
             }
         }
     }
-    /*funkcja ktora aktualizuje etykiety i wykonuje funkcje "slow_down()" - hamowania co 200 milisekund */
+
     public void update_lable() throws InterruptedException {
         Timeline timeline = new Timeline(
                 new KeyFrame(
@@ -217,6 +258,7 @@ public class Controller implements Initializable
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
     }
+
 
 
 

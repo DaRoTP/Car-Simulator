@@ -67,7 +67,7 @@
                     </VBox>
                     <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="92.0" prefWidth="63.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                         <children>
-                            <Label alignment="CENTER" prefHeight="21.0" prefWidth="58.0" text="GEAR" textFill="WHITE">
+                            <Label alignment="CENTER" prefHeight="21.0" prefWidth="58.0" text="GEAR" textAlignment="CENTER" textFill="WHITE">
                                 <font>
                                     <Font size="19.0" />
                                 </font>
@@ -79,7 +79,10 @@
                             </Label>
                         </children>
                     </VBox>
-                    <Button fx:id="Engin_ON_OFF" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#turn_ON_OF" prefHeight="69.0" prefWidth="117.0" text="START" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                    <Button fx:id="Engin_ON_OFF" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#turn_ON_OF" prefHeight="69.0" prefWidth="117.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                     <graphic>
+                        <Label fx:id="Start_Stop" alignment="CENTER" prefHeight="81.0" prefWidth="103.0" text="START" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS" />
+                     </graphic></Button>
                </children>
             </GridPane>
          </children>
@@ -92,5 +95,7 @@
                 <Button fx:id="Exit" mnemonicParsing="false" onAction="#exit_x" prefHeight="25.0" prefWidth="25.0" text="X" />
             </children>
         </HBox>
+      <Button fx:id="help_btn" mnemonicParsing="false" onAction="#Info" prefHeight="25.0" prefWidth="25.0" text="?" AnchorPane.leftAnchor="44.0" AnchorPane.topAnchor="5.0" />
+      <ImageView fx:id="Info_Image" fitHeight="495.0" fitWidth="434.0" layoutX="2.0" layoutY="-16.0" pickOnBounds="true" preserveRatio="true" y="50.0" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="34.0" />
     </children>
 </AnchorPane>
