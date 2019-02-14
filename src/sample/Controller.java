@@ -1,42 +1,58 @@
 package sample;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.application.Platform;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class Controller implements Initializable
 {
 
 
     //VARIABLES
-    private Car auto = new Car();
-    int gr = 0;
+//-------------------------------------------->
+    private Car auto = new Car(); //object of a class Car
+    int gr = 0; //changing gears variable
     boolean maximizebool = false;
+    private double xOffset = 0;
+    private double yOffset = 0;
+
+    private Image car_on = new Image("sample/resources/car_on.png");
+    private Image car_off = new Image("sample/resources/car_off.png");
 
 
     //PANES
 //-------------------------------------------->
     @FXML
-    private GridPane grid;
+    private GridPane grid = new GridPane();
     @FXML
-    StackPane stack = new StackPane();
+    private StackPane stack = new StackPane();
     @FXML
-    AnchorPane anchor = new AnchorPane();
+    private AnchorPane anchor = new AnchorPane();
+    @FXML
+    private Pane dragable = new Pane();
+
+    //IMAGES
+//-------------------------------------------->
+    @FXML
+    private ImageView car_hud;
 
     //LABELS
 //-------------------------------------------->
@@ -58,18 +74,21 @@ public class Controller implements Initializable
     @FXML
     private Button maximize;
 
-    /*wyjscie z programu */
+
+// MAXIMIZE MINIMIZE EXIT STAGE
+
+    /*exit */
     @FXML
     public void exit_x(){
         Platform.exit();
     }
-    /*zminimalizowanie okna */
+    /*minimize */
     @FXML
     public void minimize_(ActionEvent event){
         Stage stage = (Stage)((Button)event.getSource()).getScene().getWindow();
         stage.setIconified(true);
     }
-    /* Maksymalizacja */
+    /* maximize */
     @FXML
     public void maximize_(ActionEvent event){
         Stage stage = (Stage)((Button)event.getSource()).getScene().getWindow();
@@ -79,7 +98,6 @@ public class Controller implements Initializable
     }
 
 
-    /*inicjalizacja */
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         try {
@@ -92,19 +110,23 @@ public class Controller implements Initializable
 
     //TURN ENGINE ON OR OF
 //-------------------------------------------->
+    @FXML
     public void turn_ON_OF(ActionEvent event)
     {
         auto.setRunning(!auto.isRunning());
 
         if(auto.isRunning())
         {
+            car_hud.setImage(car_on);
             auto.setRPM(1120);
             tachometer_label.setText(Integer.toString(auto.getrpm()));
             auto.change_gears(gr);
             gear_label.setText(auto.getGear());
+
         }
         else
         {
+            car_hud.setImage(car_off);
             auto.setRPM(0);
             auto.setSpeed(0);
             speedometer_label.setText(Integer.toString((int)auto.getSpeed()));

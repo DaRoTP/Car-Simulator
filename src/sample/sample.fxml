@@ -8,20 +8,20 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="container" onKeyPressed="#keyPressed" prefHeight="707.0" prefWidth="1372.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<AnchorPane fx:id="anchor" onKeyPressed="#keyPressed" prefHeight="707.0" prefWidth="1372.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <children>
       <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="707.0" prefWidth="1372.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fitHeight="707.0" fitWidth="1372.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="car_hud" fitHeight="707.0" fitWidth="1372.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@resources/car_off.png" />
-               </image>
-            </ImageView>
+               </image></ImageView>
             <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" StackPane.alignment="CENTER">
               <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="871.0" minWidth="10.0" prefWidth="263.0" />
@@ -84,11 +84,12 @@
             </GridPane>
          </children>
       </StackPane>
-        <HBox layoutX="1229.0" layoutY="5.0" prefHeight="40.0" prefWidth="138.0" spacing="10.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+      <Pane fx:id="dragable" prefHeight="36.0" prefWidth="1372.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+        <HBox layoutX="1229.0" layoutY="5.0" prefHeight="28.0" prefWidth="88.0" spacing="6.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
             <children>
-                <Button fx:id="minimize" mnemonicParsing="false" onAction="#minimize_" prefHeight="31.0" prefWidth="40.0" text="_" />
-            <Button fx:id="maximize" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#maximize_" prefHeight="31.0" prefWidth="40.0" text="❏" />
-                <Button fx:id="Exit" mnemonicParsing="false" onAction="#exit_x" prefHeight="31.0" prefWidth="40.0" text="X" />
+                <Button fx:id="minimize" mnemonicParsing="false" onAction="#minimize_" prefHeight="24.0" prefWidth="25.0" text="_" />
+            <Button fx:id="maximize" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#maximize_" prefHeight="25.0" prefWidth="25.0" text="❏" />
+                <Button fx:id="Exit" mnemonicParsing="false" onAction="#exit_x" prefHeight="25.0" prefWidth="25.0" text="X" />
             </children>
         </HBox>
     </children>

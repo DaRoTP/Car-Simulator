@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 
+
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
@@ -20,6 +21,7 @@ public class Main extends Application {
             primaryStage.setResizable(false);
             primaryStage.initStyle(StageStyle.UNDECORATED);
             primaryStage.setScene(scene);
+            primaryStage.setTitle("Car simulator");
             primaryStage.show();
         } catch(Exception e) {
             e.printStackTrace();
