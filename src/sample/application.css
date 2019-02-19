@@ -81,3 +81,12 @@
 	-fx-font-size: 12;
 	-fx-text-fill: white;
 }
+
+#speed_guage{
+    -fx-progress-color: #eb008c;
+    -fx-control-inner-background: #000430;
+}
+#rpm_guage{
+    -fx-progress-color: #eb008c;
+    -fx-control-inner-background: #000430;
+}

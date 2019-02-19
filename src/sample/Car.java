@@ -40,6 +40,7 @@ public class Car
         this.gear = gear;
     }
 
+
     //CONSTRUCTOR
 //----------------------------------------->
     public Car()
@@ -49,6 +50,7 @@ public class Car
         this.rpm = 0;
         this.speed = 0;
         this.gear = "N";
+
     }
 
     //METHODS
@@ -58,43 +60,65 @@ public class Car
     public void speed_up()
     {
         /* jezeli wlaczony dowolny bieg poza 'R' i 'N' to maksymalna predkosc jest 180 km/h i 3010 obrotow */
-        if(getGear() != "R" && getGear() != "N")
+        if(getGear() != "N")
         {
-            //speed
-            if(this.speed < 24)
-                if(this.gear == "1")
-                    this.speed += 0.5;
-            if(this.speed < 43)
-                if(this.gear == "2")
-                    this.speed += 0.5;
-            if(this.speed < 92)
-                if(this.gear == "3")
-                    this.speed += 0.5;
-            if(this.speed < 121)
-                if(this.gear == "4")
-                    this.speed += 0.5;
-            if(this.speed < 180)
-                if(this.gear == "5")
-                    this.speed += 0.5;
+            //SPEED
+            if(this.speed < 220)
+            {
+                switch (gear)
+                {
+                    case "R": {
+                        if (this.speed < 20)
+                            this.speed += 0.5;
+                    }
+                    break;
+                    case "1": {
+                        if (this.speed < 30)
+                            this.speed += 0.5;
+                    }
+                    break;
+                    case "2": {
+                        if (this.speed < 50)
+                            this.speed += 0.5;
+                    }
+                    break;
+                    case "3": {
+                        if (this.speed < 70)
+                            this.speed += 0.5;
+                    }
+                    break;
+                    case "4": {
+                        if (this.speed < 100)
+                            this.speed += 0.5;
+                    }
+                    break;
+                    case "5": {
+                        if (this.speed < 150)
+                            this.speed += 0.5;
+                    }
+                    break;
+                    case "6": {
+                        if (this.speed < 220)
+                            this.speed += 0.5;
+                    }
+                    break;
+                }
+            }
+
             //RPM
-            if(this.rpm < 3010)
-                this.rpm += (5000 - this.rpm)*0.01;
-            if(this.rpm > 6000)
+            if(this.rpm < 6010)
+                this.rpm += 11;
+
+            if(this.rpm > 6100)
                 this.rpm = 6100;
+
         }
-        /* jezeli wlaczony bieg "R" to mozemy osiagnac maksymalna predkosc 20 km/h i 2100 obrotow */
-        else if(getGear() == "R")
-        {
-            if(this.speed < 20)
-                this.speed += 0.5;
-            if(this.rpm < 2100)
-                this.rpm += (5000 - this.rpm)*0.01;
-        }
+
         /* jezeli wlaczony bieg "N" to mozemy osiagnac maksymalna predkosc 0 km/h i 3100 obrotow */
         else if(getGear() == "N")
         {
-            if(this.rpm < 3100)
-                this.rpm += (5000 - this.rpm)*0.01;
+            if(this.rpm < 6100)
+                this.rpm += 11;
         }
     }
 
@@ -105,17 +129,17 @@ public class Car
         if(this.speed > 0)
             this.speed -= 0.5;
         //rpm
-        if(this.gear == "1" || this.gear == "N" || this.gear == "R")
-        {
-            if(this.rpm > 1100)
-                this.rpm -= this.rpm*0.03;
-        }
-        else
-        {
-            if(this.rpm > 0)
-                this.rpm -= this.rpm*0.03;
-        }
+        if(this.rpm > 0)
+            if(this.gear == "N")
+            {
+                if (this.rpm > 1100)
+                    this.rpm -= 11;
+            }
+            else
+                this.rpm -= 11;
 
+         if(this.rpm < 0)
+             this.rpm = 0;
     }
 
     //CHANGE GEARS
@@ -143,6 +167,9 @@ public class Car
                 break;
             case 5:
                 setGear("5");
+                break;
+            case 6:
+                setGear("6");
                 break;
         }
     }

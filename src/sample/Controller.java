@@ -10,8 +10,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.Skin;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -30,16 +33,17 @@ public class Controller implements Initializable
     //VARIABLES
 //-------------------------------------------->
     private Car auto = new Car(); //object of a class Car
-    int gr = 0; //changing gears variable
-    boolean maximizebool = false;
-    boolean change_img = false;
+    private int gr = 0; //changing gears variable
+    private boolean maximizebool = false;
+    private boolean change_img = false;
     private double xOffset = 0;
     private double yOffset = 0;
+    private boolean check = true;
 
 
     //IMAGES
 //-------------------------------------------->
-    private Image car_on = new Image("sample/resources/car_on.png");
+    private Image car_on = new Image("sample/resources/car_on1.png");
     private Image car_off = new Image("sample/resources/car_off.png");
     private Image help = new Image("sample/resources/help.png");
 
@@ -85,6 +89,13 @@ public class Controller implements Initializable
     @FXML
     private Button help_btn;
 
+    //PROGRESS INDICATOR
+//-------------------------------------------->
+    @FXML
+    private ProgressIndicator speed_guage;
+    @FXML
+    private ProgressIndicator rpm_guage;
+
 
 // MAXIMIZE MINIMIZE EXIT STAGE
 
@@ -109,8 +120,7 @@ public class Controller implements Initializable
     }
 
     /* HELP */
-    @FXML
-    public void Info(ActionEvent event){
+    public void Info(){
         change_img = !change_img;
         if(change_img)
             Info_Image.setImage(help);
@@ -122,11 +132,8 @@ public class Controller implements Initializable
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         makeDrgable();
-        try {
-            update_lable();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        update_lable();
+
 
     }
 
@@ -147,8 +154,7 @@ public class Controller implements Initializable
 
     //TURN ENGINE ON OR OF
 //-------------------------------------------->
-    @FXML
-    public void turn_ON_OF(ActionEvent event)
+    public void turn_ON_OF()
     {
         auto.setRunning(!auto.isRunning());
 
@@ -191,6 +197,7 @@ public class Controller implements Initializable
                     auto.speed_up();
                     speedometer_label.setText(Integer.toString((int)auto.getSpeed()));
                     tachometer_label.setText(Integer.toString(auto.getrpm()));
+                    check = false;
                 }
                 break;
                 /*hamowanie - uzuwamy funkcji classy car "slow_down" i aktualizujemy etykiety*/
@@ -224,7 +231,6 @@ public class Controller implements Initializable
                             auto.setRPM(auto.getrpm()+1100);
                             tachometer_label.setText(Integer.toString(auto.getrpm()));
                         }
-
                     }
                 }
                 break;
@@ -232,8 +238,8 @@ public class Controller implements Initializable
                 case D:
                 {
                     gr++;
-                    if(gr == 6)
-                        gr = 5;
+                    if(gr == 7)
+                        gr = 6;
                     auto.change_gears(gr);
                     gear_label.setText(auto.getGear());
                 }
@@ -243,15 +249,27 @@ public class Controller implements Initializable
             }
         }
     }
+    @FXML
+    public void keyReleased(KeyEvent event){
+        if(auto.isRunning())
+            if(event.getCode() == KeyCode.W){
+                check = true;
+            }
 
-    public void update_lable() throws InterruptedException {
+    }
+
+    private void update_lable(){
         Timeline timeline = new Timeline(
                 new KeyFrame(
-                        Duration.millis(200),
+                        Duration.millis(100),
                         even -> {
-                            auto.slow_down();
+                            if(check)
+                                auto.slow_down();
                             speedometer_label.setText(Integer.toString((int)auto.getSpeed()));
                             tachometer_label.setText(Integer.toString(auto.getrpm()));
+                            speed_guage.setProgress(auto.getSpeed()*0.0028);
+                            rpm_guage.setProgress(auto.getrpm()*0.000085);
+
                         }
                 )
         );
