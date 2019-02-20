@@ -3,7 +3,7 @@
 
 }
 
-#dragable{
+#draggable{
     -fx-background-color: #131952;
 }
 
@@ -82,11 +82,11 @@
 	-fx-text-fill: white;
 }
 
-#speed_guage{
+#speed_gauge{
     -fx-progress-color: #eb008c;
     -fx-control-inner-background: #000430;
 }
-#rpm_guage{
+#rpm_gauge{
     -fx-progress-color: #eb008c;
     -fx-control-inner-background: #000430;
 }

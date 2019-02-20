@@ -11,52 +11,57 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
-import javafx.scene.control.Skin;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable
 {
 
-
     //VARIABLES
 //-------------------------------------------->
     private Car auto = new Car(); //object of a class Car
-    private int gr = 0; //changing gears variable
-    private boolean maximizebool = false;
-    private boolean change_img = false;
-    private double xOffset = 0;
-    private double yOffset = 0;
-    private boolean check = true;
+    private int gear_int = 0; //changing gears variable
+    private boolean check = true; //checking if accelerating
+
+    private boolean maximizable = false; //check if window is maximized or not (false = not, true = yes)
+    private boolean change_img = false; //check if image is displayed (false = not, true = yes)
+
+    private double xOffset = 0; //draggable stage x offset
+    private double yOffset = 0; //draggable stage y offset
+
+    private double blinker = 0; // opacity control off blinker lights
+    private int turn_signal = 0; // activate blinkers 0 - both turned off 1 - left blinker 2 - right blinker
+
+    private Date date = new Date(); //get date
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy"); //display date in this format
 
 
     //IMAGES
 //-------------------------------------------->
-    private Image car_on = new Image("sample/resources/car_on1.png");
+    private Image car_on = new Image("sample/resources/car_on.png");
     private Image car_off = new Image("sample/resources/car_off.png");
     private Image help = new Image("sample/resources/help.png");
+    private Image arrow = new Image("sample/resources/arrow.png");
+
+
 
     //PANES
 //-------------------------------------------->
     @FXML
-    private GridPane grid = new GridPane();
-    @FXML
-    private StackPane stack = new StackPane();
-    @FXML
     private AnchorPane anchor = new AnchorPane();
     @FXML
-    private Pane dragable = new Pane();
+    private Pane draggable = new Pane();
 
     //IMAGES
 //-------------------------------------------->
@@ -64,6 +69,10 @@ public class Controller implements Initializable
     private ImageView car_hud;
     @FXML
     private ImageView Info_Image;
+    @FXML
+    private ImageView arrow_left;
+    @FXML
+    private ImageView arrow_right;
 
     //LABELS
 //-------------------------------------------->
@@ -75,6 +84,8 @@ public class Controller implements Initializable
     private Label gear_label;
     @FXML
     private Label Start_Stop;
+    @FXML
+    private Label Date_label;
 
     //BUTTONS
 //-------------------------------------------->
@@ -92,12 +103,20 @@ public class Controller implements Initializable
     //PROGRESS INDICATOR
 //-------------------------------------------->
     @FXML
-    private ProgressIndicator speed_guage;
+    private ProgressIndicator speed_gauge;
     @FXML
-    private ProgressIndicator rpm_guage;
+    private ProgressIndicator rpm_gauge;
 
 
-// MAXIMIZE MINIMIZE EXIT STAGE
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        makeDraggable();
+        update_label();
+        arrow_left.setOpacity(0);
+        arrow_right.setOpacity(0);
+    }
+
+    // MAXIMIZE MINIMIZE EXIT STAGE
 
     /*exit */
     @FXML
@@ -114,9 +133,9 @@ public class Controller implements Initializable
     @FXML
     public void maximize_(ActionEvent event){
         Stage stage = (Stage)((Button)event.getSource()).getScene().getWindow();
-        maximizebool = !maximizebool;
+        maximizable = !maximizable;
 
-            stage.setMaximized(maximizebool);
+        stage.setMaximized(maximizable);
     }
 
     /* HELP */
@@ -128,28 +147,32 @@ public class Controller implements Initializable
             Info_Image.setImage(null);
     }
 
-
-    @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
-        makeDrgable();
-        update_lable();
-
-
-    }
-
     //DRAGABLE STAGE
 //-------------------------------------------->
-    private void makeDrgable(){
-        dragable.setOnMousePressed((event) -> {
+    private void makeDraggable(){
+        draggable.setOnMousePressed((event) -> {
             xOffset = event.getSceneX();
             yOffset = event.getSceneY();
         });
 
-        dragable.setOnMouseDragged((event) -> {
+        draggable.setOnMouseDragged((event) -> {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setX(event.getSceneX() - xOffset);
             stage.setY(event.getSceneY() - yOffset);
         });
+    }
+
+    //TURN LIGHTS
+//-------------------------------------------->
+    public void turn_lights()
+    {
+        blinker = (blinker + 0.1) % 1;
+
+        if(blinker == 0)
+            blinker = 1;
+        else if(blinker == 0.99)
+            blinker = 0;
+
     }
 
     //TURN ENGINE ON OR OF
@@ -162,11 +185,12 @@ public class Controller implements Initializable
         {
             car_hud.setImage(car_on);
             auto.setRPM(1120);
+            auto.change_gears(gear_int);
             Start_Stop.setText("STOP");
             Start_Stop.setStyle(" -fx-text-fill: #DB37B7;  ");
-            tachometer_label.setText(Integer.toString(auto.getrpm()));
-            auto.change_gears(gr);
+            tachometer_label.setText(Integer.toString(auto.getRPM()));
             gear_label.setText(auto.getGear());
+            Date_label.setText(sdf.format(date));
 
         }
         else
@@ -174,10 +198,12 @@ public class Controller implements Initializable
             car_hud.setImage(car_off);
             auto.setRPM(0);
             auto.setSpeed(0);
-            speedometer_label.setText(Integer.toString((int)auto.getSpeed()));
             Start_Stop.setText("START");
             Start_Stop.setStyle(" -fx-text-fill: #000430;  ");
-            tachometer_label.setText(Integer.toString(auto.getrpm()));
+            tachometer_label.setText(Integer.toString(auto.getRPM()));
+            speedometer_label.setText(Integer.toString((int)auto.getSpeed()));
+            Date_label.setText("");
+            turn_signal = 0;
         }
     }
 
@@ -186,69 +212,85 @@ public class Controller implements Initializable
     @FXML
     public void keyPressed(KeyEvent ev)
     {
-        /*wszystkie dzialania mozna wykonywac tylko kiedy samochod jest wlaczony*/
+        /* all actions can be done only when the car is "ON" (isRunning = true)*/
         if(auto.isRunning())
         {
             switch(ev.getCode())
             {
-                /*przyspieszenie - uzuwamy funkcji classy car "speed_up" i aktualizujemy etykiety*/
+                /* LEFT turn signal */
+                case Q:
+                {
+                    if(turn_signal == 0)
+                        turn_signal = 1;
+                    else if(turn_signal == 1)
+                        turn_signal = 0;
+                }
+                break;
+                /* RIGHT turn signal */
+                case E:
+                {
+                    if(turn_signal == 0)
+                        turn_signal = 2;
+                    else if(turn_signal == 2)
+                        turn_signal = 0;
+                }
+                break;
+                /* ACCELERATE */
                 case W:
                 {
                     auto.speed_up();
-                    speedometer_label.setText(Integer.toString((int)auto.getSpeed()));
-                    tachometer_label.setText(Integer.toString(auto.getrpm()));
                     check = false;
                 }
                 break;
-                /*hamowanie - uzuwamy funkcji classy car "slow_down" i aktualizujemy etykiety*/
+                /* BRAKE */
                 case S:
                 {
                     auto.slow_down();
-                    speedometer_label.setText(Integer.toString((int)auto.getSpeed()));
-                    tachometer_label.setText(Integer.toString(auto.getrpm()));
                 }
                 break;
-                /*zmieniamy bieg w dol - bieg mozemy zmieniac tylko po kolei,
-                 * nie zmieniamy biegu np. z 5 na 2
-                 * kiedy przechodzimy do biegu nizszego np. z 4 na 3 i obroty sa > 2500 to dodajemy +1800 obrotow
-                 * a jezeli obroty  < 1600 dodajemy +1600 */
+                /* GEAR DOWN */
                 case A:
                 {
-                    gr--;
-                    if(gr == -2)
-                        gr = -1;
-                    auto.change_gears(gr);
+                    gear_int--;
+                    if(gear_int == -2)
+                        gear_int = -1;
+
+                    auto.change_gears(gear_int);
                     gear_label.setText(auto.getGear());
-                    if(gr != -1 && gr != 0 && gr != 1)
+
+                    if(gear_int != -1 && gear_int != 0 && gear_int != 1)
                     {
-                        if(auto.getrpm() > 2500 && auto.getrpm() < 6100)
+                        if(auto.getRPM() > 2500 && auto.getRPM() < 8100) /* when gearing down from 6,5,4,3,2 gears and RPM > 2500 then RPM += 1800 */
                         {
-                            auto.setRPM(auto.getrpm()+1800);
-                            tachometer_label.setText(Integer.toString(auto.getrpm()));
+                            auto.setRPM(auto.getRPM()+1800);
+                            tachometer_label.setText(Integer.toString(auto.getRPM()));
                         }
-                        else if(auto.getrpm() < 1600)
+                        else if(auto.getRPM() < 1600) /* when gearing down from 6,5,4,3,2 gears and RPM < 1600 then RPM += 1100 */
                         {
-                            auto.setRPM(auto.getrpm()+1100);
-                            tachometer_label.setText(Integer.toString(auto.getrpm()));
+                            auto.setRPM(auto.getRPM()+1100);
+                            tachometer_label.setText(Integer.toString(auto.getRPM()));
                         }
                     }
                 }
                 break;
-                /*zmieniamy bieg w gore - */
+                /* GEAR UP */
                 case D:
                 {
-                    gr++;
-                    if(gr == 7)
-                        gr = 6;
-                    auto.change_gears(gr);
+                    gear_int++;
+                    if(gear_int == 7)
+                        gear_int = 6;
+
+                    auto.change_gears(gear_int);
                     gear_label.setText(auto.getGear());
                 }
                 break;
+
                 default:
                     break;
             }
         }
     }
+    /* when acceleration key is released activate function "slow down" */
     @FXML
     public void keyReleased(KeyEvent event){
         if(auto.isRunning())
@@ -257,18 +299,41 @@ public class Controller implements Initializable
             }
 
     }
-
-    private void update_lable(){
+    /* UPDATE EVERY 100 milliseconds
+     * updating most of the GUI animated objects like Labels, progress indicators, Opacity of images etc...*/
+    private void update_label()
+    {
         Timeline timeline = new Timeline(
                 new KeyFrame(
                         Duration.millis(100),
                         even -> {
                             if(check)
                                 auto.slow_down();
+
                             speedometer_label.setText(Integer.toString((int)auto.getSpeed()));
-                            tachometer_label.setText(Integer.toString(auto.getrpm()));
-                            speed_guage.setProgress(auto.getSpeed()*0.0028);
-                            rpm_guage.setProgress(auto.getrpm()*0.000085);
+                            tachometer_label.setText(Integer.toString(auto.getRPM()));
+
+                            speed_gauge.setProgress(auto.getSpeed()*0.0028);
+                            rpm_gauge.setProgress(auto.getRPM()*0.000085);
+
+                            if(turn_signal == 1)// LEFT turn blinker
+                            {
+                                turn_lights();
+                                arrow_left.setOpacity(blinker);
+                            }
+                            else if(turn_signal == 2) // RIGHT turn blinker
+                            {
+                                turn_lights();
+                                arrow_right.setOpacity(blinker);
+                            }
+                            else if(turn_signal == 0) // No blinkers
+                            {
+                                arrow_right.setOpacity(0);
+                                arrow_left.setOpacity(0);
+                            }
+
+
+
 
                         }
                 )

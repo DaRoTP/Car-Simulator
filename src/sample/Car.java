@@ -19,9 +19,7 @@ public class Car
         this.running = running;
     }
     //RPM
-    public int getrpm() {
-        return rpm;
-    }
+    public int getRPM() { return rpm; }
     public void setRPM(int rpm) {
         this.rpm = rpm;
     }
@@ -59,7 +57,7 @@ public class Car
     //SPEED UP
     public void speed_up()
     {
-        /* jezeli wlaczony dowolny bieg poza 'R' i 'N' to maksymalna predkosc jest 180 km/h i 3010 obrotow */
+        /* if max speed of a specific gear is reached, acceleration is reduced to 0.05 */
         if(getGear() != "N")
         {
             //SPEED
@@ -75,46 +73,59 @@ public class Car
                     case "1": {
                         if (this.speed < 30)
                             this.speed += 0.5;
+                        else
+                            this.speed += 0.05;
                     }
                     break;
                     case "2": {
                         if (this.speed < 50)
                             this.speed += 0.5;
+                        else
+                            this.speed += 0.05;
                     }
                     break;
                     case "3": {
                         if (this.speed < 70)
                             this.speed += 0.5;
+                        else
+                            this.speed += 0.05;
                     }
                     break;
                     case "4": {
                         if (this.speed < 100)
                             this.speed += 0.5;
+                        else
+                            this.speed += 0.05;
                     }
                     break;
                     case "5": {
                         if (this.speed < 150)
                             this.speed += 0.5;
+                        else
+                            this.speed += 0.05;
                     }
                     break;
                     case "6": {
                         if (this.speed < 220)
                             this.speed += 0.5;
+                        else
+                            this.speed += 0.05;
                     }
                     break;
                 }
             }
 
             //RPM
+            /* when tpm reaches 6010 and higher it only in increments by 1 until 8100*/
             if(this.rpm < 6010)
                 this.rpm += 11;
 
-            if(this.rpm > 6100)
-                this.rpm = 6100;
+            if(this.rpm > 6010 && this.rpm < 8100)
+                this.rpm += 1;
 
         }
 
-        /* jezeli wlaczony bieg "N" to mozemy osiagnac maksymalna predkosc 0 km/h i 3100 obrotow */
+        /* when gear is on "N" max speed is 0 km/h (can't accelerate) and rpm can go up to 6100 */
         else if(getGear() == "N")
         {
             if(this.rpm < 6100)
@@ -129,6 +140,7 @@ public class Car
         if(this.speed > 0)
             this.speed -= 0.5;
         //rpm
+        /* when gear is on "N" rpm can not go below 1100 */
         if(this.rpm > 0)
             if(this.gear == "N")
             {
@@ -143,6 +155,8 @@ public class Car
     }
 
     //CHANGE GEARS
+    /*each Gear ( R, N, 1, 2...) is assigned to an int
+      * functions takes in an int value and changes gear variable to a specified gear character */
     public void change_gears(int n)
     {
         switch (n)
