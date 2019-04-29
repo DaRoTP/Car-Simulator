@@ -1,4 +1,4 @@
-package sample;
+package CarMain;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -8,8 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 
-import java.awt.*;
-
 
 public class Main extends Application {
     @Override
@@ -17,13 +15,13 @@ public class Main extends Application {
         try {
             //BorderPane root = new BorderPane();
 
-            Parent root = FXMLLoader.load(getClass().getResource("/sample/sample.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/View/CarHud.fxml"));
             Scene scene = new Scene(root,1372,707);
-            scene.getStylesheets().add(getClass().getResource("/sample/application.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("/View/CarHudStyle.css").toExternalForm());
             primaryStage.initStyle(StageStyle.UNDECORATED);
             primaryStage.setScene(scene);
             primaryStage.setTitle("Car simulator");
-            Image logo_icon = new Image("sample/resources/logo.png");
+            Image logo_icon = new Image("View/images/logo.png");
             primaryStage.getIcons().add(logo_icon);
             primaryStage.show();
         } catch(Exception e) {

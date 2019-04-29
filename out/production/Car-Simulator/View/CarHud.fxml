@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="anchor" onKeyPressed="#keyPressed" onKeyReleased="#keyReleased" prefHeight="707.0" prefWidth="1372.0" styleClass="anchor" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.Controller">
+    <children>
+      <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="707.0" prefWidth="1372.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="681.0" minWidth="10.0" prefWidth="166.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="681.0" minWidth="10.0" prefWidth="426.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="681.0" minWidth="10.0" prefWidth="147.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="681.0" minWidth="10.0" prefWidth="443.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="1213.0" minWidth="10.0" prefWidth="193.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="268.0" minHeight="10.0" prefHeight="149.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="507.0" minHeight="10.0" prefHeight="428.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="166.0" minHeight="10.0" prefHeight="130.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <ProgressIndicator fx:id="speed_gauge" progress="0.6" rotate="-121.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <ProgressIndicator fx:id="rpm_gauge" progress="0.03" rotate="-123.7" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+               </children>
+            </GridPane>
+            <ImageView fx:id="car_hud" fitHeight="707.0" fitWidth="1372.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/car_off.png" />
+               </image></ImageView>
+            <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="593.0" minWidth="10.0" prefWidth="588.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="452.0" minWidth="10.0" prefWidth="143.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="643.0" minWidth="10.0" prefWidth="641.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="288.0" minHeight="10.0" prefHeight="287.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="276.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="368.0" minHeight="10.0" prefHeight="368.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label fx:id="Date_label" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="130.0" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
+            <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" StackPane.alignment="CENTER">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="871.0" minWidth="10.0" prefWidth="263.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="904.0" minWidth="10.0" prefWidth="213.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="904.0" minWidth="10.0" prefWidth="372.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="904.0" minWidth="10.0" prefWidth="213.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="958.0" minWidth="10.0" prefWidth="316.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="318.0" minHeight="10.0" prefHeight="318.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="231.0" minHeight="10.0" prefHeight="117.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="290.0" minHeight="10.0" prefHeight="94.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="290.0" minHeight="10.0" prefHeight="196.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="122.0" prefWidth="122.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                        <children>
+                            <Label fx:id="tachometer_label" alignment="CENTER" prefHeight="73.0" prefWidth="154.0" text="0" textAlignment="JUSTIFY" textFill="WHITE">
+                                <font>
+                                    <Font size="50.0" />
+                                </font>
+                            </Label>
+                            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="60.0" prefWidth="153.0" text="RPM" textAlignment="CENTER" textFill="WHITE">
+                                <font>
+                                    <Font name="Agency FB" size="40.0" />
+                                </font>
+                            </Label>
+                        </children>
+                    </VBox>
+                    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="122.0" prefWidth="122.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                        <children>
+                            <Label fx:id="speedometer_label" alignment="CENTER" prefHeight="73.0" prefWidth="152.0" text="0" textAlignment="JUSTIFY" textFill="WHITE">
+                                <font>
+                                    <Font size="50.0" />
+                                </font>
+                            </Label>
+                            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="60.0" prefWidth="153.0" text="KM/H" textAlignment="CENTER" textFill="WHITE">
+                                <font>
+                                    <Font name="Agency FB" size="40.0" />
+                                </font>
+                            </Label>
+                        </children>
+                    </VBox>
+                    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="92.0" prefWidth="63.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                        <children>
+                            <Label alignment="CENTER" prefHeight="21.0" prefWidth="58.0" text="GEAR" textAlignment="CENTER" textFill="WHITE">
+                                <font>
+                                    <Font size="19.0" />
+                                </font>
+                            </Label>
+                            <Label fx:id="gear_label" alignment="CENTER" contentDisplay="TOP" prefHeight="32.0" prefWidth="62.0" text="N" textAlignment="CENTER" textFill="WHITE">
+                                <font>
+                                    <Font size="40.0" />
+                                </font>
+                            </Label>
+                        </children>
+                    </VBox>
+                    <Button fx:id="Engin_ON_OFF" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#turn_ON_OF" prefHeight="69.0" prefWidth="117.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                     <graphic>
+                        <Label fx:id="Start_Stop" alignment="CENTER" prefHeight="81.0" prefWidth="103.0" text="START" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Label>
+                     </graphic></Button>
+                  <GridPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="291.0" prefWidth="368.0" GridPane.columnIndex="2">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="119.0" minWidth="10.0" prefWidth="54.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="217.0" minWidth="10.0" prefWidth="57.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="217.0" minWidth="0.0" prefWidth="149.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="231.0" minWidth="10.0" prefWidth="59.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="247.0" minWidth="10.0" prefWidth="53.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="146.0" minHeight="10.0" prefHeight="146.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="128.0" minHeight="10.0" prefHeight="105.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="108.0" minHeight="10.0" prefHeight="67.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <ImageView fx:id="arrow_left" fitHeight="33.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                           <image>
+                              <Image url="@images/arrow.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="arrow_right" fitHeight="70.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true" rotate="180.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                           <image>
+                              <Image url="@images/arrow.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </GridPane>
+               </children>
+            </GridPane>
+         </children>
+      </StackPane>
+      <Pane fx:id="draggable" prefHeight="36.0" prefWidth="1372.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor></Pane>
+        <HBox layoutX="1229.0" layoutY="5.0" prefHeight="28.0" prefWidth="88.0" spacing="6.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+            <children>
+                <Button fx:id="minimize" mnemonicParsing="false" onAction="#minimize_" prefHeight="24.0" prefWidth="25.0" text="_">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+            <Button fx:id="maximize" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#maximize_" prefHeight="25.0" prefWidth="25.0" text="❏">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+                <Button fx:id="Exit" mnemonicParsing="false" onAction="#exit_x" prefHeight="25.0" prefWidth="25.0" styleClass="Exit" text="X">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+            </children>
+        </HBox>
+      <Button fx:id="help_btn" mnemonicParsing="false" onAction="#Info" prefHeight="25.0" prefWidth="25.0" text="?" AnchorPane.leftAnchor="44.0" AnchorPane.topAnchor="5.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <ImageView fx:id="Info_Image" fitHeight="495.0" fitWidth="434.0" layoutX="8.0" layoutY="-16.0" pickOnBounds="true" preserveRatio="true" y="50.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="34.0" />
+    </children>
+</AnchorPane>

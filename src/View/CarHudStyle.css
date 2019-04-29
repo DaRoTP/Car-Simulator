@@ -1,4 +1,4 @@
-#anchor{
+.anchor{
     -fx-background-color: #000430;
 
 }
@@ -36,7 +36,7 @@
 	-fx-text-fill: #2196f3;
 }
 
-#Exit{
+.Exit{
 	-fx-font-weight: bold;
 	-fx-background-color: red;
 	-fx-background-radius: 22;
@@ -44,7 +44,7 @@
 	-fx-text-fill: white;
 }
 
-#Exit:hover{
+.Exit:hover{
 	-fx-font-weight: bold;
 	-fx-background-color: white;
 	-fx-background-radius: 22;
@@ -52,7 +52,7 @@
 	-fx-text-fill: red;
 }
 
-#Exit:pressed{
+.Exit:pressed{
 	-fx-font-weight: bold;
 	-fx-background-color: white;
 	-fx-background-radius: 22;

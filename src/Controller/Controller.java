@@ -1,10 +1,11 @@
-package sample;
+package Controller;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -15,10 +16,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import Model.Car;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -49,17 +52,12 @@ public class Controller implements Initializable
 
     //IMAGES
 //-------------------------------------------->
-    private Image car_on = new Image("sample/resources/car_on.png");
-    private Image car_off = new Image("sample/resources/car_off.png");
-    private Image help = new Image("sample/resources/help.png");
-    private Image arrow = new Image("sample/resources/arrow.png");
-
-
+    private Image car_on = new Image("View/images/car_on.png");
+    private Image car_off = new Image("View/images/car_off.png");
+    private Image help = new Image("View/images/help.png");
 
     //PANES
 //-------------------------------------------->
-    @FXML
-    private AnchorPane anchor = new AnchorPane();
     @FXML
     private Pane draggable = new Pane();
 
@@ -87,18 +85,6 @@ public class Controller implements Initializable
     @FXML
     private Label Date_label;
 
-    //BUTTONS
-//-------------------------------------------->
-    @FXML
-    private Button Engin_ON_OFF;
-    @FXML
-    private Button Exit;
-    @FXML
-    private Button minimize;
-    @FXML
-    private Button maximize;
-    @FXML
-    private Button help_btn;
 
     //PROGRESS INDICATOR
 //-------------------------------------------->
@@ -150,15 +136,16 @@ public class Controller implements Initializable
     //DRAGGABLE STAGE
 //-------------------------------------------->
     private void makeDraggable(){
-        draggable.setOnMousePressed((event) -> {
+
+        draggable.setOnMousePressed(event -> {
             xOffset = event.getSceneX();
             yOffset = event.getSceneY();
         });
 
-        draggable.setOnMouseDragged((event) -> {
+        draggable.setOnMouseDragged(event -> {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setX(event.getSceneX() - xOffset);
-            stage.setY(event.getSceneY() - yOffset);
+            stage.setX(event.getScreenX() - xOffset);
+            stage.setY(event.getScreenY() - yOffset);
         });
     }
 
@@ -331,9 +318,6 @@ public class Controller implements Initializable
                                 arrow_right.setOpacity(0);
                                 arrow_left.setOpacity(0);
                             }
-
-
-
 
                         }
                 )
