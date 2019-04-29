@@ -1,0 +1,92 @@
+#anchor{
+    -fx-background-color: #000430;
+
+}
+
+#draggable{
+    -fx-background-color: #131952;
+}
+
+#Start_Stop{
+    -fx-font-size: 25;
+    -fx-text-fill: #000430;
+}
+
+.button{
+	-fx-font-weight: bold;
+	-fx-background-color: #2196f3;
+	-fx-background-radius: 22;
+	-fx-font-size: 10;
+	-fx-text-fill: white;
+}
+
+.button:hover{
+	-fx-font-weight: bold;
+	-fx-background-color: white;
+	-fx-background-radius: 22;
+	-fx-font-size: 10;
+	-fx-text-fill: #2196f3;
+}
+
+.button:pressed{
+	-fx-font-weight: bold;
+	-fx-background-color: white;
+	-fx-background-radius: 22;
+	-fx-font-size: 10;
+	-fx-text-fill: #2196f3;
+}
+
+#Exit{
+	-fx-font-weight: bold;
+	-fx-background-color: red;
+	-fx-background-radius: 22;
+	-fx-font-size: 10;
+	-fx-text-fill: white;
+}
+
+#Exit:hover{
+	-fx-font-weight: bold;
+	-fx-background-color: white;
+	-fx-background-radius: 22;
+	-fx-font-size: 10;
+	-fx-text-fill: red;
+}
+
+#Exit:pressed{
+	-fx-font-weight: bold;
+	-fx-background-color: white;
+	-fx-background-radius: 22;
+	-fx-font-size: 10;
+	-fx-text-fill: red;
+}
+#help{
+	-fx-font-weight: bold;
+	-fx-background-color: white;
+	-fx-background-radius: 22;
+	-fx-font-size: 12;
+	-fx-text-fill: #2196f3;
+}
+#help:hover{
+	-fx-font-weight: bold;
+	-fx-background-color: #2196f3;
+	-fx-background-radius: 22;
+	-fx-font-size: 12;
+	-fx-text-fill: white;
+}
+
+#help:pressed{
+	-fx-font-weight: bold;
+	-fx-background-color: #2196f3;
+	-fx-background-radius: 22;
+	-fx-font-size: 12;
+	-fx-text-fill: white;
+}
+
+#speed_gauge{
+    -fx-progress-color: #eb008c;
+    -fx-control-inner-background: #000430;
+}
+#rpm_gauge{
+    -fx-progress-color: #eb008c;
+    -fx-control-inner-background: #000430;
+}

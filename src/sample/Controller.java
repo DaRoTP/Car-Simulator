@@ -147,7 +147,7 @@ public class Controller implements Initializable
             Info_Image.setImage(null);
     }
 
-    //DRAGABLE STAGE
+    //DRAGGABLE STAGE
 //-------------------------------------------->
     private void makeDraggable(){
         draggable.setOnMousePressed((event) -> {
@@ -225,7 +225,7 @@ public class Controller implements Initializable
                     else if(turn_signal == 1)
                         turn_signal = 0;
                 }
-                break;
+                    break;
                 /* RIGHT turn signal */
                 case E:
                 {
@@ -234,20 +234,20 @@ public class Controller implements Initializable
                     else if(turn_signal == 2)
                         turn_signal = 0;
                 }
-                break;
+                    break;
                 /* ACCELERATE */
                 case W:
                 {
                     auto.speed_up();
                     check = false;
                 }
-                break;
+                    break;
                 /* BRAKE */
                 case S:
                 {
                     auto.slow_down();
                 }
-                break;
+                    break;
                 /* GEAR DOWN */
                 case A:
                 {

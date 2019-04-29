@@ -6,7 +6,9 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 
+import java.awt.*;
 
 
 public class Main extends Application {
@@ -18,10 +20,11 @@ public class Main extends Application {
             Parent root = FXMLLoader.load(getClass().getResource("/sample/sample.fxml"));
             Scene scene = new Scene(root,1372,707);
             scene.getStylesheets().add(getClass().getResource("/sample/application.css").toExternalForm());
-            primaryStage.setResizable(false);
             primaryStage.initStyle(StageStyle.UNDECORATED);
             primaryStage.setScene(scene);
             primaryStage.setTitle("Car simulator");
+            Image logo_icon = new Image("sample/resources/logo.png");
+            primaryStage.getIcons().add(logo_icon);
             primaryStage.show();
         } catch(Exception e) {
             e.printStackTrace();
